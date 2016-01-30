@@ -1,0 +1,27 @@
+Instrument: Guitar
+Strings: 6
+Tuning: Standard
+Root Note: F#
+Chord Name: maj7
+Scale: Major
+Training String:
+Start Training Fret: 0
+End Training Fret: 12
+Number of Questions: 5
+Load And Save Score: N
+Start Chord Fret: 0
+End Chord Fret: 17
+Print Log: No
+
+
+# Notes
+# Instrument must be bass or guitar
+# Strings can be 4-7 depending on the instrument
+# Tuning must match the tuning_dict items in Fretboard.py exactly (Caps of each 1st letter)
+# Chord must match the chord_dict items in Fretboard.py exactly (lower caps)
+# Scale: must match the ListScales items in Fretboard.py exactly (Caps of each 1st letter)
+# To increase your fretboard knowledge, the Training string must match any open string note for the instrument. If left blank the training program will randomise the training string from all available open strings
+# Start and End Training Fret limits the training range between those two frets
+# Number of Questions are how many notes you want to guess from the training range
+# Load and Save Score is a Y/N anwer. If Y is selected, it will load any existing score board for your previous results. If N is selected, it won't load your previous score board, or save your current score.
+
