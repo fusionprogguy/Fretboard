@@ -15,11 +15,11 @@ Print Log: No
 
 
 # Notes
-# Instrument must be bass or guitar
+# Instrument must be bass, guitar, banjo, mandolin, bouzouki, or ukulele.
 # Strings can be 4-7 depending on the instrument
-# Tuning must match the tuning_dict items in Fretboard.py exactly (Caps of each 1st letter)
-# Chord must match the chord_dict items in Fretboard.py exactly (lower caps)
-# Scale: must match the ListScales items in Fretboard.py exactly (Caps of each 1st letter)
+# Tuning must match the tuning_dict items in Tunings.py exactly (Caps of each 1st letter)
+# Chord must match the chord_dict items in Chords.py exactly (lower caps)
+# Scale: must match the ListScales items in Scales.py exactly (Caps of each 1st letter)
 # To increase your fretboard knowledge, the Training string must match any open string note for the instrument. If left blank the training program will randomise the training string from all available open strings
 # Start and End Training Fret limits the training range between those two frets
 # Number of Questions are how many notes you want to guess from the training range
