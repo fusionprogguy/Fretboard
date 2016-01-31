@@ -14,8 +14,7 @@ This Python project can be used to learn how to play chords and scales on a vari
 The purpose of the project was to learn more about chord and scale theory, and provide the user with visual material with which to learn where the notes are located on the fretboard and to practice reaching those notes while playing chords or scales. Another purpose of the project was to learn Python and to try and apply statistical techniques or machine learning once the data structure is in place and sufficient data has been collected on how humans would finger a certain chord or even a scale.
 
 ## Main Menu
-To run the Fretboard Python program in the command window simply type:
-
+To run this project you will need to install Python or run it in a web browser. See the section below called "Installation of Python" for further details. Assuming you have Python installed and you are in the same folder as the Python files in this project, in the command window simply type:
 ```
 python Fretboard.py
 ```
@@ -176,7 +175,7 @@ Scale Notes: A, B, Db, D, E, Gb, Ab
 
 ## Notes
 
-Editing of this file is not advised as this file contains the available note names and variables that the program will use. Variable names should not be changed, but if there are any mistakes in the lists, these can be modified. notes_sharp and notes_flat are used a lot in the program, however some variables are only used in the Semi-tone interval trainer where you can test your knowledge of natural and accidental notes, and various octaves. 
+Editing of the [Notes.py](Notes.py) file is not advised as this file contains the available note names and variables that the program will use. Variable names should not be changed, but if there are any mistakes in the lists, these can be modified. _notes_sharp_ and _notes_flat_ are used a lot in the program, however some variables are only used in the Semi-tone interval trainer where you can test your knowledge of natural and accidental notes, and various octaves. 
 
 Generally more testing has been done with notes that use flats than sharps. Hopefully future testing will ensure both notation can be consistently used throughout the program.
 
@@ -215,7 +214,7 @@ Voices:          B  T  A  S
 
 ![alt text](https://github.com/fusionprogguy/Fretboard/blob/master/TedGreene1.png "V-2: ABST Chord")
 
-When you use the chord tone path 1, 3, 5, 7, you come up with ABST.
+When you use the chord tone path order 1 -> 3 -> 5 -> 7 and look up the associated voicings you come up with ABST.
 
 When walking through the chord tone path one should also note that higher octaves need to be converted to lower octave equivalents, so 9th = 2nd, 11th = 4ths, and 13th = 6th. Once you have done this and have the chord tone path order you can look up which system the chord belongs to in Ted Greene's Master Table.
     
