@@ -86,9 +86,9 @@ For example, if you wanted to add a diminished chord you'd write the line in [Ch
 ```
 'dim':['diminished','1','b3','b5'],
 ```
-The first quote 'dim' would be how you'd enter it in [settings.txt](settings.txt). The second quote 'diminished' might be spelled out when the program runs and shows you chords for 12 keys for the diminished scale, for instance. 
+The first quote 'dim' would be how you'd enter it under 'Chord Name:' in [settings.txt](settings.txt). The second quote 'diminished' might be spelled out when the program runs and shows you chords for 12 keys for the diminished scale, for instance. 
 
-If you wanted to add a new tuning for an instrument such as a 7-string guitar, with the tuning name 'Big Guitar', you'd use a format of <instrument> <string no> <short tuning name> : [<list of open string notes>] eg.
+If you wanted to add a new tuning for an instrument such as a 7-string guitar, with the tuning name 'Big Guitar', you'd use a format of _instrument_ _string no_ _short tuning name_ : [_list of open string notes_] eg.
 ```
     'Guitar 7 Big Guitar': ['G', 'C', 'E', 'G', 'C', 'E', 'G'],
 ```
@@ -104,6 +104,46 @@ Editing of this file is not advised as this file contains the available note nam
 
 Generally more testing has been done with notes that use flats than sharps. Hopefully future testing will ensure both notation can be consistently used throughout the program.
 
+## Ted Greene
+
+Greene created a system for categorising four-note chords into 14 voicing groups. For each note in the chord Greene would place them in one of the four choral voice names.
+
+The voices are:
+S for Soprano, the highest sounding note in the chord
+A for Alto, the second highest note in the chord
+T for Tenor, the third highest note in the chord
+B for Bass, the lowest note in the chord
+
+You can start on any note of the chord and determine where it lies. This is how you would examine the Emaj7 chord to find the voice name for each note.
+
+```
+Chord Name:  Emaj7
+Intervals:   1, 3, 5, 7
+Chord Notes: E, Ab, B, Eb
+
+           E  A  D  G  B  E
+     5fr.  :  :  :  :  E  :
+           ----------------
+           :  +  Ab :  :  :
+           ----------------
+           +  +  :  :  :  B
+           ----------------
+           :  :  :  Eb :  :
+           ----------------
+           :  :  +  +  +  :
+           ----------------
+Notes:           Ab Eb E  B
+Intervals:       3  7  1  5
+Voices:          B  T  A  S
+```
+
+![alt text](https://github.com/fusionprogguy/Fretboard/blob/master/src/common/images/TedGreene1.png "V-2: ABST Chord")
+
+If you use the chord tone path 1, 3, 5, 7, you come up with ABST.
+
+When walking through the chord tone path one should also note that higher octaves need to be converted to lower octave equivalents, so 9th = 2nd, 11th = 4ths, and 13th = 6th. Once you have done this and have the chord tone path order you can look up with system the chord belongs to in Ted Greene's Master Table.
+    
+![alt text](https://github.com/fusionprogguy/Fretboard/blob/master/src/common/images/MasterTable.png "Master Table")
 
 ## Future Updates
 
