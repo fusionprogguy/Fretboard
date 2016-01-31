@@ -1,7 +1,7 @@
 ---
 title: "README.md"
 author: "fusionprogguy"
-date: "Sunday, 1st Feb, 2016"
+date: "Sunday, 31st Jan, 2016"
 output: html_document
 ---
 
@@ -9,9 +9,45 @@ output: html_document
 
 Project: [Fretboard Python Program](Fretboard.py)
 
-This Python code in [Fretboard.py](Fretboard.py) can be used to learn how to play chords and scales on a variety of stringed instruments such as guitar, bass, banjo, mandolin, bouzouki, and ukulele. You can view chords and scales in a text based format, test your knowledge of the fretboard with a note guessing game, train your knowledge of intervals/degrees, show tabs for a sequence of chords, learn about the mathematics of fret lengths, investigate Ted Greene's V-System for categorising chords (eg Close, Drop 2, Drop 3 etc), and explore the Joni Mitchell Tuning notation to identify tuning families for common and alternate tunings.
+This Python project can be used to learn how to play chords and scales on a variety of stringed instruments such as guitar, bass, banjo, mandolin, bouzouki, and ukulele. You can view chords and scales in a text based format, test your knowledge of the fretboard with a note guessing game, train your knowledge of intervals/degrees, show tabs for a sequence of chords, learn about the mathematics of fret lengths, investigate Ted Greene's V-System for categorising chords (eg Close, Drop 2, Drop 3 etc), and explore the Joni Mitchell Tuning notation to identify tuning families for common and alternate tunings.
 
-The purpose of the project was to learn more about chord and scale theory, and provide the user with visual material with which to learn where the notes are located on the fretboard, and to practice reaching those notes while playing chords or scales. Another purpose of the project was to learn Python.
+The purpose of the project was to learn more about chord and scale theory, and provide the user with visual material with which to learn where the notes are located on the fretboard and to practice reaching those notes while playing chords or scales. Another purpose of the project was to learn Python and to try and apply statistical techniques or machine learning once the data structure is in place and sufficient data has been collected on how humans would finger a certain chord or even a scale.
+
+## Main Menu
+To run the Fretboard Python program in the command window simply type:
+
+```
+python Fretboard.py
+```
+
+A menu will appear which reads from the settings file and checks the particular instrument you have chosen as well as any scales or chords you want to see. These chords and scales appear in brackets. When you activate any part of the program, any displays for your fretboard will be shown for your particular instrument. All the work around chords diagrams with fingerings are specific to 6-string guitar as this is the only data I currently have. Future releases will hopefully be able to look for patterns from the guitar tables and apply them to other instruments with similar tuning. 
+
+MAIN MENU - 6 STRING GUITAR IN STANDARD TUNING
+---------------------------------------------------------
+1. Change Settings
+2. All Notes on Fretboard
+3. Scale in 12 keys (Major)
+4. Scale Tabs (Major)
+5. Chord Inver. in 12 keys (Maj7)
+6. Chord Diagram in 12 keys (Maj7)
+7. Mental Fretboard Trainer
+8. Visual Fretboard Trainer
+9. Semi-tone Interval Trainer
+10. Finger Reach
+11. Chord Chart (Maj7)
+12. Your Chord Sequence (Tabs)
+13. Chord Progressions
+14. Play Notes of Scales
+15. Joni Mitchell Tunings Notation
+16. Ted Greene's V-System
+17. Testing V-System
+18. Exit
+
+Please Select: 
+```
+
+You can then make your selection by entering a number for the menu item you'd like to explore. Most options should function, although as the project is not finished, there may still be bugs and list items that haven't been tested or completed in a while.
+
 
 ## Settings File
 
@@ -19,6 +55,7 @@ The [settings.txt](settings.txt) file contains important parameters which give t
 
 The first half of the file contains the settings and looks something like this:
 
+```
 Instrument: Guitar
 Strings: 6
 Tuning: Standard
@@ -33,10 +70,11 @@ Load And Save Score: N
 Start Chord Fret: 0
 End Chord Fret: 17
 Print Log: No
+```
 
 The most important variables are the instrument and the number of strings. For a list of the available instruments, string numbers and alternate tunings see [Tunings.py](Tunings.py). Ignore the instrument + string, and use the rest of the string for the name of the tuning eg 'Standard' or 'Open D Minor'. To find the available Chord Names view [Chords.py](Chords.py). The convention for Chord Name for major chords for instance is a blank ('') while for minor it is simply 'm'. To find the available Scales view [Scales.py](Scales.py). The spelling of the tunings, chords, and scales must match exactly, including lower/upper caps. Generally the shorter names are used in the settings file.
 
-The second half of the file describes the individual variables. You can edit the first half to change the way information will be displayed in various parts of the program. If you make any manual changes to the settings files and want it to take effect you must stop the python program and run it again. The menu item "Change Settings" may change the variables in memory but currently does not save them to the text file. Later updates may change this.
+The second half of the file describes the individual variables. You can edit the first half to change the way information will be displayed in various parts of the program. If you make any manual changes to the settings files and want it to take effect you must stop the Python program and run it again. The menu item "Change Settings" may change the variables in memory but currently does not save them to the text file. Later updates may change this.
 
 
 ## Updating Chords, Scales, Tunings and Progressions File
@@ -97,7 +135,7 @@ After having writen the code I've found other software developers who are into m
 Their guitar scale generator can be found here:
 [http://www.fachords.com/guitar-scale-generator](http://www.fachords.com/guitar-scale-generator)
 
-One limitation in comparison to my program is that Fachords only provides tunings for 6-string guitars, whereas my program offers bass and guitar from 4-7 strings. The code is easily modifyable to add more stringed instruments and tunings.
+One limitation in comparison to my program is that Fachords only provides tunings for 6-string guitars, whereas my program offers bass and guitar from 4-7 strings. The code is easily modifiable to add more stringed instruments and tunings.
 
 
 ## Music Theory
