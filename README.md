@@ -107,13 +107,14 @@ Generally more testing has been done with notes that use flats than sharps. Hope
 
 ## Future Updates
 
-Expanding the Chord Database
+### Expanding the Chord Database
 One of the goals for the future will be to use the database of almost 3000 chords as a basis for a computer program to generate new voicings. Currently only a small sample of around 5% of the chords is provided as an example to run the program. Most of my current work is getting the program to identify chords as belonging to one of the 14 V-System groups that Ted Greene has developed which relate to various drop voicings. See [Method 1 - How To Recognize Voicings](http://www.tedgreene.com/images/lessons/v_system/03_Method1_HowToRecognize.pdf)
-I'm currently starting to work on a function to generate drop voicings of any 4-note close chord to see if this will expand the chord dictionary. After the drop function works for any close voicing, I will create a function to generate all of the 14 kinds of voicings, and discard any voicings which are spread too far appart for the human hand. 
+I'm currently starting to work on a function to generate drop voicings of any 4-note close chord to see if this will expand the chord dictionary. After the drop function works for any close voicing, I will create a function to generate all of the 14 kinds of voicings, and discard any voicings which are spread too far apart for the human hand. 
 
-Chord Data Analysis
+### Chord Data Analysis
 I imagine that various statistical techniques such as [k-means clustering ](https://en.wikipedia.org/wiki/K-means_clustering) could be used to group chords in a new way. I also imagine that machine learning could be applied to come up with realistic finger positions for existing and new chords. The data could be split to test the ability of the machine learning program to replicate the ringer position columns of the database.
 
+### Music Theory
 As my knowledge of music theory grows, I will try to incorporate this into the program. Feel free to fork this project and make modifications, or to send me feedback.
 
 
@@ -140,7 +141,7 @@ Their guitar scale generator can be found here:
 One limitation in comparison to my program is that Fachords only provides tunings for 6-string guitars, whereas my program offers bass and guitar from 4-7 strings. The code is easily modifiable to add more stringed instruments and tunings.
 
 
-## Music Theory
+## Music Theory for Beginners
 
 For those new to music theory, here are some introductions to how scales and modes work, and the respective intervals between notes.
 
