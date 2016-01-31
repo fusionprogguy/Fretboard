@@ -1,7 +1,7 @@
 ---
 title: "README.md"
 author: "fusionprogguy"
-date: "Saturday, Jan 30, 2016"
+date: "Sunday, 1st Feb, 2016"
 output: html_document
 ---
 
