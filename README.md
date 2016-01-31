@@ -137,13 +137,13 @@ Intervals:       3  7  1  5
 Voices:          B  T  A  S
 ```
 
-![alt text](https://github.com/fusionprogguy/Fretboard/blob/master/src/common/images/TedGreene1.png "V-2: ABST Chord")
+![alt text](https://github.com/fusionprogguy/Fretboard/blob/master/TedGreene1.png "V-2: ABST Chord")
 
 If you use the chord tone path 1, 3, 5, 7, you come up with ABST.
 
-When walking through the chord tone path one should also note that higher octaves need to be converted to lower octave equivalents, so 9th = 2nd, 11th = 4ths, and 13th = 6th. Once you have done this and have the chord tone path order you can look up with system the chord belongs to in Ted Greene's Master Table.
+When walking through the chord tone path one should also note that higher octaves need to be converted to lower octave equivalents, so 9th = 2nd, 11th = 4ths, and 13th = 6th. Once you have done this and have the chord tone path order you can look up which system the chord belongs to in Ted Greene's Master Table.
     
-![alt text](https://github.com/fusionprogguy/Fretboard/blob/master/src/common/images/MasterTable.png "Master Table")
+![alt text](https://github.com/fusionprogguy/Fretboard/blob/master/MasterTable.png "Master Table")
 
 ## Future Updates
 
