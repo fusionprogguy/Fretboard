@@ -271,6 +271,11 @@ Two web pages that allow you to run Python source code are:
 Simply copy and paste the content of each file, using the same names and press "Execute" in tutorialspoint or "Run" in ideone.
 
 
+# App Development
+
+I may soon be wrapping up development of this Python program in the coming months and be moving towards iOS app development. I will be using the same ideas and concepts found in this program, but for a palm tablet or hand-sized smart phone. Using a old terminal console is perhaps not the friendliest way to interact with software, so I hope my future app will reach many more people by being more user-friendly. I am very excided about the new project as it will provide a much higher level of interactivity with the software as well a provide much more pleasing graphics. Perhaps the Python project can be used to help me organise a database of chords and theory, while the app will use any results of the analysis and categorisations to help the musician find just the right chord and voicing for their harmonic situation.
+
+
 # Credits
 
 After having writen the beginning of this code I've found other software developers who are into music and provide useful programs online for those wanting to learn the fretboard. One guy who approached the fretboard visually, in the way that I think about music was Giancarlo from [http://www.fachords.com](http://www.fachords.com/). He doesn't use staves and doesn't have tabs at the forefront because you interact with the fretboard as you do with the instrument in real life. I would not discourage anyone from learning staves or tabs because it is a good investment if you want to be able to play other people's music, but for the beginner it can appear to be another hurdle that gets in the way of practicing your instrument. 
@@ -278,35 +283,14 @@ After having writen the beginning of this code I've found other software develop
 The purpose of Fachords seems to be the same as mine - make music and its theoretical foundations more accessible by allowing the user to interact with it. Fachords is easy and fun to use, and I hold it up as the bar by which to measure the usability of a software guitar program. 
 
 
-# App Development
-
-I may soon be wrapping up development of this Python program in the coming months and be moving towards iOS app development. I will be using the same ideas and concepts found in this program, but for a palm tablet or hand-sized smart phone. Using a old terminal console is perhaps not the friendliest way to interact with software, so I hope my future app will reach many more people by being more user-friendly. I am very excided about the new project as it will provide a much higher level of interactivity with the software as well a provide much more pleasing graphics. Perhaps the Python project can be used to help me organise a database of chords and theory, while the app will use any results of the analysis and categorisations to help the musician find just the right chord and voicing for their harmonic situation.
-
-## Credits
-
-After having writen the code I've found other software developers who are into music and providing useful programs online for those wanting to learn the fretboard. 
-
-Their guitar scale generator can be found here:
-[http://www.fachords.com/guitar-scale-generator](http://www.fachords.com/guitar-scale-generator)
-
-One limitation in comparison to my program is that Fachords only provides tunings for 6-string guitars, whereas my program offers bass and guitar from 4-7 strings. The code is easily modifiable to add more stringed instruments and tunings.
-
-
-## Music Theory for Beginners
-
-For those new to music theory, here are some introductions to how scales and modes work, and the respective intervals between notes.
-
-[https://en.wikipedia.org/wiki/List_of_musical_scales_and_modes](https://en.wikipedia.org/wiki/List_of_musical_scales_and_modes)
-[https://en.wikibooks.org/wiki/Music_Theory/Scales_and_Intervals](https://en.wikibooks.org/wiki/Music_Theory/Scales_and_Intervals)
-[https://en.wikipedia.org/?title=Scale_(music)](https://en.wikipedia.org/?title=Scale_(music))
-
-
-## License
+# License
 
 The scales and chords and related code in the files related to this project is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors for its use or misuse. Any commercial use is prohibited without express permission.
 
 
-## Contact
+# Contact
+
+If you have any tables of music-related information that could be codified, know of interesting music or guitar related APIs, or insightful music theory to offer, please contact me. Also feel free to fork this project and make modifications or to send me feedback or advice. 
 
 e-mail: steven.muschalik@gmail.com
 Twitter: @StevenMuschalik
