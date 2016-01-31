@@ -109,10 +109,10 @@ Generally more testing has been done with notes that use flats than sharps. Hope
 Greene created a system for categorising four-note chords into 14 voicing groups. For each note in the chord Greene would place them in one of the four choral voice names.
 
 The voices are:
-S for Soprano, the highest sounding note in the chord
-A for Alto, the second highest note in the chord
-T for Tenor, the third highest note in the chord
-B for Bass, the lowest note in the chord
+*   S for Soprano, the highest sounding note in the chord
+*   A for Alto, the second highest note in the chord
+*   T for Tenor, the third highest note in the chord
+*   B for Bass, the lowest note in the chord
 
 You can start on any note of the chord and determine where it lies. This is how you would examine the Emaj7 chord to find the voice name for each note.
 
@@ -139,7 +139,7 @@ Voices:          B  T  A  S
 
 ![alt text](https://github.com/fusionprogguy/Fretboard/blob/master/TedGreene1.png "V-2: ABST Chord")
 
-If you use the chord tone path 1, 3, 5, 7, you come up with ABST.
+When you use the chord tone path 1, 3, 5, 7, you come up with ABST.
 
 When walking through the chord tone path one should also note that higher octaves need to be converted to lower octave equivalents, so 9th = 2nd, 11th = 4ths, and 13th = 6th. Once you have done this and have the chord tone path order you can look up which system the chord belongs to in Ted Greene's Master Table.
     
