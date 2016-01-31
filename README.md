@@ -22,6 +22,7 @@ python Fretboard.py
 
 A menu will appear which reads from the settings file and checks the particular instrument you have chosen as well as any scales or chords you want to see. These chords and scales appear in brackets. When you activate any part of the program, any displays for your fretboard will be shown for your particular instrument. All the work around chords diagrams with fingerings are specific to 6-string guitar as this is the only data I currently have. Future releases will hopefully be able to look for patterns from the guitar tables and apply them to other instruments with similar tuning. 
 
+```
 MAIN MENU - 6 STRING GUITAR IN STANDARD TUNING
 ---------------------------------------------------------
 1. Change Settings
@@ -92,6 +93,7 @@ If you wanted to add a new tuning for an instrument such as a 7-string guitar, w
     'Guitar 7 Big Guitar': ['G', 'C', 'E', 'G', 'C', 'E', 'G'],
 ```
 If you wanted to add new scales, the format is a bit trickier. It has three parts - "Scale" (name of the scale), "H_Steps" (half steps), "L_Steps" (intervals). The element H_Steps is not vital for the running of the program as it is used only as a display, so can be left blank eg "H_Steps": ''
+
 ```
 ListScales.append({"Scale": 'Dorian',  "H_Steps": 'R, W, H, W, W, W, H, W', "L_Steps": ['1', '2', 'b3', '4', '5', '6', 'b7']})
 ```
