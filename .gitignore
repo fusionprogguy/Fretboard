@@ -1,3 +1,10 @@
+# Files in Fretboard Folder to ignore
+*.pdf
+*.pyc
+*.js
+*.pkl
+*.docx
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db

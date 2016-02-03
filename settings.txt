@@ -24,4 +24,3 @@ Print Log: No
 # Start and End Training Fret limits the training range between those two frets
 # Number of Questions are how many notes you want to guess from the training range
 # Load and Save Score is a Y/N anwer. If Y is selected, it will load any existing score board for your previous results. If N is selected, it won't load your previous score board, or save your current score.
-

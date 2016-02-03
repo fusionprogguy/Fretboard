@@ -98,7 +98,7 @@ ListScales.append({"Scale": 'Dorian',  "H_Steps": 'R, W, H, W, W, W, H, W', "L_S
 ```
 ## Chord Diagrams
 
-Chord Diagrams are an important tool in learning how to play chords and understanding the building blocks of music. Chord diagrams are a visual representation of the fretboard at a given position. The current database contains almost 3000 chords, with details of the fret position on each string, the notes for each string, the intervals for each string and the fingers used for each string.
+Chord Diagrams are an important tool in learning how to play chords and understanding the building blocks of music. Chord diagrams are a visual representation of the fretboard at a given position. The current online database contains almost 300 chords, with details of the fret position on each string, the notes for each string, the intervals for each string and the fingers used for each string.
 
 I found the dots in most chord diagrams lacking in information, so decided that I wanted three views for each chord. You can view the Notes, Intervals, or Finger Positions, depending on what is most important to you. 
 
@@ -223,7 +223,7 @@ When walking through the chord tone path one should also note that higher octave
 # Future Updates
 
 ## Tabs
- So far the program does not provide tabs, however it does produce nice text-based diagrams of chord diagrams and fretboard diagrams. Once this tab feature is implemented, I may add various Exercises that are shown in fretboard and tabs format. For example, the tab format for a A minor blues pentatonic scale for a 4-string bass would look like this:
+So far the program does not provide tabs, however it does produce nice text-based diagrams of chord diagrams and fretboard diagrams. Once this tab feature is implemented, I may add various Exercises that are shown in fretboard and tabs format. For example, the tab format for a A minor blues pentatonic scale for a 4-string bass would look like this:
  
  ```
 G|-----------------------5--7--8--7--5-----------------------|
@@ -233,7 +233,7 @@ E|--5--8-----------------------------------------------8--5--|
  ```
  
 ## Expanding the Chord Database
-One of the goals for the future will be to use the database of almost 3000 chords as a basis for a computer program to generate new voicings. Currently only a small sample of around 5% of the chords is provided as an example to run the program. Most of my current work is getting the program to identify chords as belonging to one of the fourteen V-System groups that jazz great Ted Greene has developed which relate to various drop voicings. See [Method 1 - How To Recognize Voicings](http://www.tedgreene.com/images/lessons/v_system/03_Method1_HowToRecognize.pdf)
+The online database has almost 300 chords, while the one I use contains almost 3000. One of the goals for the future will be to use the database of almost 3000 chords as a basis for a computer program to generate new voicings. Currently only a small sample of around 10% of the chords is provided as an example to run the program. Most of my current work is getting the program to identify chords as belonging to one of the fourteen V-System groups that jazz great Ted Greene has developed which relate to various drop voicings. See [Method 1 - How To Recognize Voicings](http://www.tedgreene.com/images/lessons/v_system/03_Method1_HowToRecognize.pdf)
 
 ## Inversions
 I will be creating a small function to generate same-string inversions of chords. Hopefully this may yield a few more chords for the Chord Database.
