@@ -4,6 +4,14 @@
 *.js
 *.pkl
 *.docx
+log_*.*
+old-README.md
+Copy_xlsm_macro.txt
+Chord Finger Positions - Copy.csv
+Chord Finger Positions-old.csv
+Chord Finger Positions.xls
+.Rhistory
+.idea/
 
 # Windows image file caches
 Thumbs.db
