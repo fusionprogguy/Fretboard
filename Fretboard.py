@@ -42,9 +42,168 @@ if Settings.print_log.lower() == "yes" or Settings.print_log.lower() == "y":
     sys.stdout = Logger(filename)
 
 
+def show_tabs(root_note, notes_per_string, string_order, start_interval, end_interval, num_octaves, bool_flat, bool_scale):
+    # notes_per_string is the maximum number of notes that you can use on any string
+    # string_order is a list of strings numbers to follow. For example [6, 5, 4, 3, 2, 1, 1, 2, 3, 4, 5, 6] will start at the bottom string, go to the top, then down again.
+    # start_interval can be any interval eg '1', 'b3', '5' etc but will typically be '1', on which the scale will start. The same applies to end_interval.
+    # num_octaves will typically be 1, 2 or 3.
+
+    try:  # See if the dict_tuning in the Settings.txt can be found
+       bool_sharp_open = bool_sharp_scale(tuning_dict[Settings.dict_tuning])
+    except KeyError:
+       print "Error: Can't find", "'"+Settings.dict_tuning+"'", "in tuning_dict. Change tuning in settings.txt"
+
+    fret_sym = unichr(124)
+
+    # bool_scale = False
+    if bool_scale == True:  # If you want a fretboard with scales
+        # Find the Index of the chosen scale
+        scale_interval = ""
+        scale_steps = ""
+        for Scale in ListScales:  # s = scale, h = H_Steps, i = interval (L_Steps)
+            # print Scale["Scale"], Scale["H_Steps"], Scale["L_Steps"]
+            if Scale["Scale"] == Settings.string_scale:  # if the scale matches a scale in ListScales
+                scale_steps = Scale["H_Steps"]
+                scale_interval = Scale["L_Steps"]
+                break
+    else:  # If you want a fretboard with chords
+        scale_interval = chord_dict[chord_short][1:]
+
+    valid_notes = return_scale_notes(root_note, scale_interval)
+    print ""
+    print "Scale Name:", root_note, Settings.string_scale
+    print "Intervals: ", ' '.join(scale_interval)
+    print "Notes:     ", ' '.join(valid_notes)
+    print ""
+    show_fretboard(tuning_dict, notes_sharp, notes_flat, valid_notes, bool_flat=True, bool_scale=True, bool_interval=False)
+    print ""
+
+    notes_on_string = 0
+    seg = " " * 5
+    string_notes = ['' for i in range(int(Settings.string_no)+2)]  # Fret numbers eg 3
+    string_notes[int(Settings.string_no)] = seg          # Fret note eg 'A'
+    string_notes[int(Settings.string_no)+1] = seg        # Intervals eg 'b3'
+
+
+    for i, semitones in enumerate(return_semitones(scale_interval)):
+        step_from_note = (notes.index(root_note) + semitones) % 12
+        fret_note = notes[step_from_note]
+        print scale_interval[i], semitones, fret_note
+
+
+    for fret in range(Settings.end_chord_fret):
+        string_no = 0
+        for open_string in reversed(range(len(tuning_dict[Settings.dict_tuning]))):
+            o_string_note = tuning_dict[Settings.dict_tuning][open_string]  # Open string of the instrument
+
+            # print open_string, fret, O_string_note
+            step_from_note = (notes.index(o_string_note) + fret) % 12
+            fret_note = notes[step_from_note]
+            interval = return_interval(root_note, fret_note)
+
+            if fret > 0:  # after the first fret
+                if fret_note in flat(valid_notes) or fret_note in sharp(valid_notes):    # fret_note is valid as either sharp or flat
+                    notes_on_string += 1
+                    for fill in range(int(Settings.string_no)):
+                        m = max(len(fret_note), len(str(fret)), len(str(interval)))+2
+                        if fill == string_no:
+                            set_fret = "-" * (m - len(str(fret)))       # Fret number
+                            seg = " " * (m - len(fret_note))            # Fret note
+                            seg_int = " " * (m - len(str(interval)))    # Fret interval
+                            string_notes[fill] += set_fret + str(fret)                      # Fret number
+                            string_notes[int(Settings.string_no)] += seg + fret_note        # Fret note
+                            string_notes[int(Settings.string_no)+1] += seg_int + interval   # Fret interval
+                        else:
+                            seg = "-" * m
+                            string_notes[fill] += seg
+            else:        # opening strings
+                seg = " " * (4 - len(o_string_note))
+                string_notes[string_no] += seg + o_string_note + fret_sym
+            string_no += 1
+
+    for string in string_notes:
+        print string  # First lines are fret numbers for each open string, then last two lines are notes and then intervals.
+    print ""
+
+
+def show_tabs2(root_note, notes_per_string, string_order, start_interval, end_interval, num_octaves, bool_flat, bool_scale):
+    # notes_per_string is the maximum number of notes that you can use on any string
+    # string_order is a list of strings numbers to follow. For example [6, 5, 4, 3, 2, 1, 1, 2, 3, 4, 5, 6] will start at the bottom string, go to the top, then down again.
+    # start_interval can be any interval eg '1', 'b3', '5' etc but will typically be '1', on which the scale will start. The same applies to end_interval.
+    # num_octaves will typically be 1, 2 or 3.
+
+    try:  # See if the dict_tuning in the Settings.txt can be found
+       bool_sharp_open = bool_sharp_scale(tuning_dict[Settings.dict_tuning])
+    except KeyError:
+       print "Error: Can't find", "'"+Settings.dict_tuning+"'", "in tuning_dict. Change tuning in settings.txt"
+
+    fret_sym = unichr(124)
+
+    # bool_scale = False
+    if bool_scale == True:  # If you want a fretboard with scales
+        # Find the Index of the chosen scale
+        scale_interval = ""
+        scale_steps = ""
+        for Scale in ListScales:  # s = scale, h = H_Steps, i = interval (L_Steps)
+            # print Scale["Scale"], Scale["H_Steps"], Scale["L_Steps"]
+            if Scale["Scale"] == Settings.string_scale:  # if the scale matches a scale in ListScales
+                scale_steps = Scale["H_Steps"]
+                scale_interval = Scale["L_Steps"]
+                break
+    else:  # If you want a fretboard with chords
+        scale_interval = chord_dict[chord_short][1:]
+
+    valid_notes = return_scale_notes(root_note, scale_interval)
+    print ""
+    print "Scale Name:", root_note, Settings.string_scale
+    print "Intervals: ", ' '.join(scale_interval)
+    print "Notes:     ", ' '.join(valid_notes)
+    print ""
+    show_fretboard(tuning_dict, notes_sharp, notes_flat, valid_notes, bool_flat=True, bool_scale=True, bool_interval=False)
+    print ""
+
+    notes_on_string = 0
+    seg = " " * 5
+    string_notes = ['' for i in range(int(Settings.string_no)+2)]  # Fret numbers eg 3
+    string_notes[int(Settings.string_no)] = seg          # Fret note eg 'A'
+    string_notes[int(Settings.string_no)+1] = seg        # Intervals eg 'b3'
+
+    for fret in range(Settings.end_chord_fret):
+        string_no = 0
+        for open_string in reversed(range(len(tuning_dict[Settings.dict_tuning]))):
+            o_string_note = tuning_dict[Settings.dict_tuning][open_string]  # Open string of the instrument
+
+            # print open_string, fret, O_string_note
+            step_from_note = (notes.index(o_string_note) + fret) % 12
+            fret_note = notes[step_from_note]
+            interval = return_interval(root_note, fret_note)
+
+            if fret > 0:  # after the first fret
+                if fret_note in flat(valid_notes) or fret_note in sharp(valid_notes):    # fret_note is valid as either sharp or flat
+                    notes_on_string += 1
+                    for fill in range(int(Settings.string_no)):
+                        m = max(len(fret_note), len(str(fret)), len(str(interval)))+2
+                        if fill == string_no:
+                            set_fret = "-" * (m - len(str(fret)))       # Fret number
+                            seg = " " * (m - len(fret_note))            # Fret note
+                            seg_int = " " * (m - len(str(interval)))    # Fret interval
+                            string_notes[fill] += set_fret + str(fret)                      # Fret number
+                            string_notes[int(Settings.string_no)] += seg + fret_note        # Fret note
+                            string_notes[int(Settings.string_no)+1] += seg_int + interval   # Fret interval
+                        else:
+                            seg = "-" * m
+                            string_notes[fill] += seg
+            else:        # opening strings
+                seg = " " * (4 - len(o_string_note))
+                string_notes[string_no] += seg + o_string_note + fret_sym
+            string_no += 1
+
+    for string in string_notes:
+        print string  # First lines are fret numbers for each open string, then last two lines are notes and then intervals.
+    print ""
+
 def show_fretboard(tuning_dict, notes_sharp, notes_flat, valid_notes, bool_flat, bool_scale, bool_interval):
     # This function prints a character map of the fretboard
-
     # tuning_dict contains the dictionary for all the tunings
     # tuning contains the tuning for the instrument
     # valid_notes contains a list of notes that it will show
@@ -665,8 +824,7 @@ def return_semitones(intervals):
         semitones.append(semitone)
     return semitones
 
-
-def return_interval(root_note, note):  # root_note is a string, note is a string
+def return_semitone_distance(root_note, note):  # root_note is a string, note is a string
     # Returns the semi-tones between the two notes root_note and note
 
     if root_note in notes_flat:
@@ -682,6 +840,10 @@ def return_interval(root_note, note):  # root_note is a string, note is a string
     #print root_note, note, a, b, semitone
     #print ""
     return semitone
+
+
+def return_interval(root_note, note):
+    return steps[return_semitone_distance(root_note, note)]
 
 
 def get_key(key):
@@ -706,7 +868,7 @@ def joni_mitchell_tuning(tuning):
     semitones.append(last_note)          # add the first note to the list
 
     for open_string in tuning_dict[tuning][1:]:
-        tune_to_fret = return_interval(last_note, open_string)
+        tune_to_fret = return_semitone_distance(last_note, open_string)
         semitones.append(tune_to_fret)   # the remaining elements will be numbers of semitones
         #print last_note, open_string, tune_to_fret
         last_note = open_string
@@ -2879,7 +3041,7 @@ def show_menu():
             elif selection == 3:
                 scale_all_keys()
             elif selection == 4:
-                print main_menu[selection], "is not ready!"
+                show_tabs(root_note = 'C', notes_per_string=3, string_order=[6,5,4,3,2,1], start_interval='1', end_interval='1', num_octaves=1, bool_flat=True, bool_scale = True)
             elif selection == 5:
                 chord_all_keys()
             elif selection == 6:
@@ -2932,8 +3094,7 @@ def show_menu():
                 #show_ted_greene('F7#9')
                 #show_ted_greene('Bm(maj7)')
             elif selection == 17:
-
-                #C6   x-x-14-12-10-8
+                print "C6   x-x-14-12-10-8"
                 print drop(fret_close_positions=['x', 'x', '14', '12', '10', '8'], drops=[2,4], start_strings=[2,4], move_to=[3,2], drop_interval=[-12,12])
 
                 #print 'Bb A A# F# Gb C Db', " - ", sharp('Bb A A# F# Gb C Db')

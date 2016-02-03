@@ -3,7 +3,7 @@ Strings: 6
 Tuning: Standard
 Root Note: F#
 Chord Name: maj7
-Scale: Major
+Scale: Nine Tone
 Training String:
 Start Training Fret: 0
 End Training Fret: 12

@@ -133,7 +133,7 @@ Generally I show 5 frets as a default, however it changes if the chord is stretc
 
 When a certain fret or string is not part of the chord, i use ":"
 When a certain note is part of the chord, but not used in that particular fingering, I use "+"
-If there is note, interval or finger used for a particular string, the fret contains the relevant detail.
+If there is a note, interval or finger used for a particular string, the fret contains the relevant detail.
 
 As a beginner you may need help identifying the fingers to use, so your focus may be on "Finger Pos". As you increase your knowledge of chord construction, intervals may become more important. Finally, when you want to focus on fretboard note knowledge, the note diagram will be useful. I have also modified the final line to include muted strings with the notes and intervals because it means you don't have to look at two different parts of the chart to identify them. 
 

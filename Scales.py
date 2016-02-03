@@ -79,7 +79,7 @@ ListScales.append({"Scale": 'Natural Minor',  "H_Steps": 'R, W, H, W, W, H, W, W
 ListScales.append({"Scale": 'Natural Pure Minor',  "H_Steps": 'R, W, H, W, W, H, W, W', "L_Steps": ['1', '2', 'b3', '4', '5', 'b6', 'b7']})
 ListScales.append({"Scale": 'Neopolitan',  "H_Steps": 'R, H, W, W, W, H, 1.5, H', "L_Steps": ['1', 'b2', 'b3', '4', '5', 'b6', '7']})
 ListScales.append({"Scale": 'Neopolitan Major',  "H_Steps": 'R, H, W, W, W, W, W, H', "L_Steps": ['1', 'b2', 'b3', '4', '5', '6', '7']})
-ListScales.append({"Scale": 'Nine Tone',  "H_Steps": 'R, W, H, H, W, H, H, H, WH', "L_Steps": ['1', '2', 'b3', '3', 'b5', 'bb6', 'bbb7']})
+ListScales.append({"Scale": 'Nine Tone',  "H_Steps": 'R, W, H, H, W, H, H, H, W, H', "L_Steps": ['1', '2', 'b3', '3', 'b5', 'bb6', 'bbb7']})
 ListScales.append({"Scale": 'Oriental (a)',  "H_Steps": 'R, H, 1.5, H, H, W, W, W', "L_Steps": ['1', 'b2', '3', '4', 'b5', 'b6', 'b7']})
 ListScales.append({"Scale": 'Overtone',  "H_Steps": 'R, W, W, W, H, W, H, W', "L_Steps": ['1', '2', '3', '#4', '5', '6', 'b7']})
 ListScales.append({"Scale": 'Overtone Dominant',  "H_Steps": 'R, W, W, W, H, W, H, W', "L_Steps": ['1', '2', '3', '#4', '5', '6', 'b7']})
