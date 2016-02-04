@@ -42,7 +42,7 @@ if Settings.print_log.lower() == "yes" or Settings.print_log.lower() == "y":
     sys.stdout = Logger(filename)
 
 
-def show_tabs(root_note, notes_per_string, string_order, start_interval, end_interval, num_octaves, bool_flat, bool_scale):
+def show_tabs(root_note, notes_per_string, start_interval, num_octaves, bool_flat, bool_scale):
     # notes_per_string is the maximum number of notes that you can use on any string
     # string_order is a list of strings numbers to follow. For example [6, 5, 4, 3, 2, 1, 1, 2, 3, 4, 5, 6] will start at the bottom string, go to the top, then down again.
     # start_interval can be any interval eg '1', 'b3', '5' etc but will typically be '1', on which the scale will start. The same applies to end_interval.
@@ -70,6 +70,7 @@ def show_tabs(root_note, notes_per_string, string_order, start_interval, end_int
         scale_interval = chord_dict[chord_short][1:]
 
     valid_notes = return_scale_notes(root_note, scale_interval)
+
     print ""
     print "Scale Name:  ", root_note, Settings.string_scale
     print "Steps:       ", scale_steps
@@ -77,67 +78,107 @@ def show_tabs(root_note, notes_per_string, string_order, start_interval, end_int
     print "Scale Notes: ", ' '.join(valid_notes)
     print ""
     show_fretboard(tuning_dict, notes_sharp, notes_flat, valid_notes, bool_flat=True, bool_scale=True, bool_interval=False)
-    print ""
 
-    notes_on_string = 0
+    # Find the lowest sounding note in the chord
+    #jm_tuning_add = [0 for i in range(int(Settings.string_no))]
+    #for i in range(1, int(Settings.string_no)):
+    #    jm_tuning_add[i] += jm_tuning_add[i-1] + joni_mitchell_tuning(Settings.dict_tuning)[i]  # For standard tuning the result is ['E',5,5,5,5,4,5] so the addition becomes 0, 5, 10, 15, 19, 24
+
     seg = " " * 5
+    bool_octave_leap = False
+    out_of_reach = False
+
+    legend = [seg for i in range(3)]  # First line = Note, Second line = Interval, Third line = Fret
     string_notes = ['' for i in range(int(Settings.string_no)+2)]  # Fret numbers eg 3
-    string_notes[int(Settings.string_no)] = seg          # Fret note eg 'A'
-    string_notes[int(Settings.string_no)+1] = seg        # Intervals eg 'b3'
 
     for string_no, open_string in enumerate(tuning_dict[Settings.dict_tuning]):
         seg = " " * (4 - len(open_string))
         string_notes[string_no] += seg + open_string + fret_sym
 
     string_no = 0
-    inte = 0
+    inte = start_interval - 1  # degree of the interval eg for Major scale 1 = '1', 2 = '2', etc
+    last_fret = 0
+    octave = 0
     while string_no < int(Settings.string_no):
-        o_string_note = tuning_dict[Settings.dict_tuning][string_no]  # Open string of the instrument
-        sum_valid_notes = 0
+        o_string_note = tuning_dict[Settings.dict_tuning][string_no]    # Open string of the instrument
+        sum_valid_notes = 0                                             # Check that you don't exceed the number of notes per string
 
-        while sum_valid_notes < notes_per_string:
+        while sum_valid_notes < notes_per_string and octave <= num_octaves:
             semitones = return_semitones(scale_interval)[inte % len(scale_interval)]
-            interval = steps[semitones]
-            step_from_note = (notes.index(root_note) + semitones) % 12
-            fret_note = notes[step_from_note]
-            fret = return_semitone_distance(o_string_note, fret_note)
+            interval = steps[semitones]                                 # eg 1 2 b3 3 b5
+            step_from_note = (notes.index(root_note) + semitones)
+            fret_note = notes[step_from_note % 12]                      # eg B Db D Eb F Gb G
+            fret = return_semitone_distance(o_string_note, fret_note)   # Fret number to appear on the tab lines for each string
+            # fret = notes.index(o_string_note) + step_from_note
+
+            if semitones == return_semitones(scale_interval)[start_interval - 1 % len(scale_interval)]:
+                octave += 1
+                #print "octave", octave
+
+            # store the first finger used on the string and the last finger.
+            if sum_valid_notes == 0:
+                start_fret = fret
+            else:
+                end_fret = fret
+                # check if the reach is too far from the starting fret to the last finger on the same string
+                if abs(end_fret - start_fret) > 5:
+                    if abs(end_fret + 12 - start_fret) > 5:  # Check if the octave is also out of reach
+                        # print "BREAK 1", o_string_note, "s", start_fret, "e", end_fret, "distance", abs(end_fret - start_fret), abs(end_fret + 12 - start_fret)
+                        out_of_reach = True
+                        break
+                    else:  # If the octave on the same string is within reach, move the fret one octave higher.
+                        # print "Add 12", o_string_note, "s", start_fret, "e", end_fret, "distance", abs(end_fret + 12 - start_fret)
+                        fret = fret + 12
+                        bool_octave_leap = True
 
             # print o_string_note, string_no, interval, semitones, fret, fret_note
-            if fret > 0:  # after the first fret
-                for fill in range(int(Settings.string_no)):
-                    m = max(len(fret_note), len(str(fret)), len(str(interval)))+2
+            if fret >= 0:
+                for fill in range(int(Settings.string_no)):  # Fill in blanks for each string
+                    m = max(len(fret_note), len(str(fret)), len(str(interval)))+2   # Have a buffer of at least 2 chars for fret number / note / interval
                     if fill == string_no:
-                        set_fret = "-" * (m - len(str(fret)))       # Fret number
-                        seg = " " * (m - len(fret_note))            # Fret note
-                        seg_int = " " * (m - len(str(interval)))    # Fret interval
-                        string_notes[string_no] += set_fret + str(fret)                      # Fret number
-                        string_notes[int(Settings.string_no)] += seg + fret_note        # Fret note
-                        string_notes[int(Settings.string_no)+1] += seg_int + interval   # Fret interval
+                        seg_fret = "-" * (m - len(str(fret)))            # Fret number
+                        seg = " " * (m - len(fret_note))                 # Fret note
+                        seg_int = " " * (m - len(str(interval)))         # Fret interval
+                        seg_int_blank = " " * (m - len(str(fret)))       # Fret blank
+                        string_notes[string_no] += seg_fret + str(fret)  # Fret number
+                        legend[0] += seg + fret_note                     # Fret note
+                        legend[1] += seg_int + interval                  # Fret interval
+                        legend[2] += seg_int_blank + str(fret)           # Fret number
                     else:
                         seg = "-" * m
                         string_notes[fill] += seg
+
             sum_valid_notes += 1
             inte += 1
+        last_fret = end_fret
         string_no += 1
 
-    for string in reversed(string_notes[:-2]):
+    #if out_of_reach or bool_octave_leap:
+    for string in reversed(string_notes):
         print string
-    for string in string_notes[-2:]:
-        print string
+    for leg in legend[:-1]:
+        print leg
     print ""
-
 
 def scale_tabs_all_keys():
     # Print out the fretboard for all root notes
-    notes_per_string = 3
+    notes_on_string = 3
+    octaves = 2
+    start_on = 1
+
     print " "
     print " "
     print Settings.string_scale.title(), "Scale for 12 keys"
     print "---------------------------------------------------------"
-    print "Notes per string:", notes_per_string
+    print "Notes per string:", notes_on_string, "  Start on interval:", start_on, "  Octaves:", octaves
+
     # Print the scales for each of the 12 keys
-    for root_note in notes_flat:
-        show_tabs(root_note, notes_per_string, string_order=[6,5,4,3,2,1], start_interval='1', end_interval='1', num_octaves=1, bool_flat=True, bool_scale = True)
+    for Scale in ListScales:
+        Settings.string_scale = Scale["Scale"]
+        scale_interval = Scale["L_Steps"]
+        if len(scale_interval) > 6:
+            #for root_note in notes_flat:
+            show_tabs('C', notes_on_string, start_on, octaves, bool_flat=True, bool_scale=True)
 
 
 def show_fretboard(tuning_dict, notes_sharp, notes_flat, valid_notes, bool_flat, bool_scale, bool_interval):
@@ -190,7 +231,7 @@ def show_fretboard(tuning_dict, notes_sharp, notes_flat, valid_notes, bool_flat,
 
         for fret in range(13):
             # print open_string, fret, O_string_note
-            step_from_note = (notes.index(o_string_note) + fret) % 12
+            step_from_note = (notes.index(flat(o_string_note)) + fret) % 12
             fret_note = notes[step_from_note]
 
             if fret_note in flat(valid_notes) or fret_note in sharp(valid_notes):    # fret_note is valid as either sharp or flat
@@ -748,17 +789,27 @@ def return_semitones(intervals):
         step = 0
         b = inter.count('b')  # Count the number of flats in the interval (eg b3)
         h = inter.count('#')  # Count the number of sharps in the interval (eg #5)
+
+        #print inter, b, h, inter[-1], inter[0]
         if b >= 1 or h >= 1:
-            if b >= 1:  # flattened more than once
+            if b >= 1:  # flattened more than twice
+                interval_temp = inter.rsplit('b', 1)[-1]  # Anything after the "b"
+                if inter.count('x') > 0:                  # eg '4xb7' or '5xb7'
+                    b = int(inter[0])
                 step = -b
-                interval_temp = inter.replace("b", "")
             if h >= 1:  # sharpened more than once
+                interval_temp = inter.rsplit('#', 1)[-1]  # Anything after the "#"
+                if inter.count('x') > 0:                  # eg '4x#7' or '5x#7'
+                    h = int(inter[0])
                 step = h
-                interval_temp = inter.replace("#", "")
         else:
             interval_temp = inter
 
-        semitone = (steps.index(interval_temp) + step) % 12
+        try:
+            semitone = (steps.index(interval_temp) + step) % 12
+        except:
+            print "Invalid interval", interval_temp
+
         semitones.append(semitone)
     return semitones
 
@@ -863,57 +914,29 @@ def return_scale_notes(root_note, intervals):  # root_note is a string, interval
         step = 0
         b = inter.count('b')  # Count the number of flats in the interval (eg b3)
         h = inter.count('#')  # Count the number of sharps in the interval (eg #5)
-        if b > 1 or h >= 1:
-            if b > 1:  # flattened more than twice
+        if b >= 1 or h >= 1:
+            if b >= 1:  # flattened more than twice
+                interval_temp = inter.rsplit('b', 1)[-1]  # Anything after the "b"
+                if inter.count('x') > 0:                  # eg '4xb7' or '5xb7'
+                    b = int(inter[0])
                 step = -b
-                interval_temp = inter.replace("b", "")
             if h >= 1:  # sharpened more than once
+                interval_temp = inter.rsplit('#', 1)[-1]  # Anything after the "#"
+                if inter.count('x') > 0:                  # eg '4x#7' or '5x#7'
+                    h = int(inter[0])
                 step = h
-                interval_temp = inter.replace("#", "")
         else:
             interval_temp = inter
 
-        # find the number of the interval, then add/substract the number of sharps/flats
-        step_from_note = (notes.index(root_note) + steps_octave.index(interval_temp) + step) % 12
+        try:
+            # find the number of the interval, then add/substract the number of sharps/flats
+            step_from_note = (notes.index(root_note) + steps_octave.index(interval_temp) + step) % 12
+        except:
+            print "root note or interval does not exist", root_note, b, h, intervals, inter, interval_temp
 
         # add valid notes to notes_from_root
         notes_from_root.append(notes[step_from_note])
     return notes_from_root
-
-
-def return_chord_notes2(root, chord_name):
-    # Given the root_note and chord_name, this function returns a list with the notes in the chord eg. ['Ab', 'C', 'Eb'] for a Ab Major Chord
-
-    # print "Root Note:", root_note
-    # print "Chord Name: ", chord_name
-    # print "Intervals:", chord_dict[chord_name]
-    # print "Interval, steps, note"
-
-    chord_notes = list()
-    for chord in range(1, len(chord_dict[chord_name])):
-        interval = chord_dict[chord_name][chord]
-        interval_temp = interval
-        step = 0
-        step_from_note = 0
-        # print "chord", chord, "interval", interval, "steps", steps.index(interval)+step
-        b = interval.count('b')  # Count the number of flats in the interval (eg b3)
-        h = interval.count('#')  # Count the number of sharps in the interval (eg #5)
-        if b >= 1 or h >= 1:
-            if b >= 1:  # flattened more than once
-                step = -b
-                interval_temp = interval.replace("b", "")
-            if h >= 1:  # sharpened more than once
-                step = h
-                interval_temp = interval.replace("#", "")
-
-        # find the number of the interval, then add/substract the number of sharps/flats
-        step_from_note = (notes.index(root[:1]) + steps.index(interval_temp) + step) % 12
-
-        # add valid notes to chord_notes
-        chord_notes.append(notes[step_from_note])
-        # print interval, steps.index(interval_temp)+step, notes[step_from_note]
-    print "Notes in Chord:", chord_notes
-    return chord_notes
 
 
 def fret_distance(Fret1, Fret2, ratio, fret_length):
@@ -1481,6 +1504,7 @@ def change_settings():
             if h >= 1:  # sharpened more than once
                 step = h
                 interval_temp = interval.replace("#", "")
+
         # find the number of the interval, then add/substract the number of sharps/flats
         step_from_note = (notes.index(Settings.root_note) + steps.index(interval_temp) + step) % 12
 
@@ -3032,6 +3056,7 @@ def show_menu():
                 #show_ted_greene('F7#9')
                 #show_ted_greene('Bm(maj7)')
             elif selection == 17:
+
                 print "C6   x-x-14-12-10-8"
                 print drop(fret_close_positions=['x', 'x', '14', '12', '10', '8'], drops=[2,4], start_strings=[2,4], move_to=[3,2], drop_interval=[-12,12])
 

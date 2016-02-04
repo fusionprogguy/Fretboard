@@ -1,6 +1,6 @@
-Instrument: Guitar
-Strings: 6
-Tuning: Standard
+Instrument: Bass
+Strings: 5
+Tuning: Standard B
 Root Note: F#
 Chord Name: maj7
 Scale: Nine Tone
@@ -11,7 +11,7 @@ Number of Questions: 5
 Load And Save Score: N
 Start Chord Fret: 0
 End Chord Fret: 17
-Print Log: No
+Print Log: Yes
 
 
 # Notes
