@@ -1,7 +1,7 @@
-Instrument: Bass
-Strings: 5
-Tuning: Standard B
-Root Note: F#
+Instrument: Guitar
+Strings: 6
+Tuning: Standard
+Root Note: C
 Chord Name: maj7
 Scale: Nine Tone
 Training String:
@@ -11,7 +11,9 @@ Number of Questions: 5
 Load And Save Score: N
 Start Chord Fret: 0
 End Chord Fret: 17
-Print Log: Yes
+Print Log: No
+Exercise: Diatonic Fourths
+
 
 
 # Notes
