@@ -173,6 +173,44 @@ Scale Notes: A, B, Db, D, E, Gb, Ab
                  O         O         O         O             OO  
 ```
 
+## Tabs
+
+The program now features tabs which work in conjunction with scale exercises in [Exercises.py](Exercises.py). In the main menu activate 'Scale Tabs in 12 keys'. The program looks into the settings file for the line eg 'Exercise: Diatonic Thirds Sawtooth' to find the exercise you want to apply to the current scale.
+Debugging is still occuring as I test how different parameters affect the program, for example how many notes per string are indicated. Some of these parameters may be added to the settings file in the future.
+
+Currently the program prints out a fretboard diagram and underneath that a tab. Notice that I've added a legend at the bottom to show the notes and the intervals - a feature often missing in tabs which I find invaluable for beginners.
+The program takes the exercise pattern (eg 1-3-4-2, 3-5-6-4, 5-7-1-6, 7-2-3-1) and applies it to the intervals of the particular scale (1-b3-4-2, b3-5-b6-4, 5-b7-1-b6, b7-2-b3-1). 
+
+In this example the program is accepting 3 notes per string, as long as the notes are within 5 frets of each other. Changing the notes per string parameter will yield different tabs. 
+
+```
+Scale Name:   Ab Natural Minor
+Steps:        R, W, H, W, W, H, W, W
+Intervals:    1, 2, b3, 4, 5, b6, b7
+Scale Notes:  Ab, Bb, B, Db, Eb, E, Gb
+
+   E|----|--Gb|----|--Ab|----|--Bb|---B|----|--Db|----|--Eb|---E|
+   B|----|--Db|----|--Eb|---E|----|--Gb|----|--Ab|----|--Bb|---B|
+   G|--Ab|----|--Bb|---B|----|--Db|----|--Eb|---E|----|--Gb|----|
+   D|--Eb|---E|----|--Gb|----|--Ab|----|--Bb|---B|----|--Db|----|
+   A|--Bb|---B|----|--Db|----|--Eb|---E|----|--Gb|----|--Ab|----|
+   E|----|--Gb|----|--Ab|----|--Bb|---B|----|--Db|----|--Eb|---E|
+                 O         O         O         O             OO  
+
+Diatonic Thirds Sawtooth
+1-3-4-2, 3-5-6-4, 5-7-1-6, 7-2-3-1
+1-b3-4-2, b3-5-b6-4, 5-b7-1-b6, b7-2-b3-1
+
+   E|-------------------------------------------------------6---7---4
+   B|-------------------------------------------9---5---7------------
+   G|-------------------------------6---8--11------------------------
+   D|---------------------------2------------------------------------
+   A|---------------1---2---6----------------------------------------
+   E|---4---7---9----------------------------------------------------
+       Ab   B  Db  Bb   B  Eb   E  Db  Eb  Gb  Ab   E  Gb  Bb   B  Ab
+        1  b3   4   2  b3   5  b6   4   5  b7   1  b6  b7   2  b3   1
+```
+
 ## Notes
 
 Editing of the [Notes.py](Notes.py) file is not advised as this file contains the available note names and variables that the program will use. Variable names should not be changed, but if there are any mistakes in the lists, these can be modified. _notes_sharp_ and _notes_flat_ are used a lot in the program, however some variables are only used in the Semi-tone interval trainer where you can test your knowledge of natural and accidental notes, and various octaves. 
@@ -222,16 +260,6 @@ When walking through the chord tone path one should also note that higher octave
 
 # Future Updates
 
-## Tabs
-So far the program does not provide tabs, however it does produce nice text-based diagrams of chord diagrams and fretboard diagrams. Once this tab feature is implemented, I may add various Exercises that are shown in fretboard and tabs format. For example, the tab format for a A minor blues pentatonic scale for a 4-string bass would look like this:
- 
- ```
-G|-----------------------5--7--8--7--5-----------------------|
-D|-----------------5--7-----------------7--5-----------------|
-A|--------5--6--7-----------------------------7--6--5--------|
-E|--5--8-----------------------------------------------8--5--|
- ```
- 
 ## Expanding the Chord Database
 The online database has almost 300 chords, while the one I use contains almost 3000. One of the goals for the future will be to use the database of almost 3000 chords as a basis for a computer program to generate new voicings. Currently only a small sample of around 10% of the chords is provided as an example to run the program. Most of my current work is getting the program to identify chords as belonging to one of the fourteen V-System groups that jazz great Ted Greene has developed which relate to various drop voicings. See [Method 1 - How To Recognize Voicings](http://www.tedgreene.com/images/lessons/v_system/03_Method1_HowToRecognize.pdf)
 
