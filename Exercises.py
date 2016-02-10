@@ -58,7 +58,7 @@ scalesequence.append({"Exercise":'Three Note Sequence No. 1', "Note Grouping":[3
 scalesequence.append({"Exercise":'Triplet Pattern No. 1', "Note Grouping":[3], "Sequence":[1,2,1,2,3,2,3,4,3,4,5,4,5,6,5,6,7,6,7,1,7]})
 
 # Triplet Pattern No. 2: 1-7-6, 7-6-5, 6-5-4, 5-4-3, 4-3-2, 3-2-1
-scalesequence.append({"Exercise":'Triplet Pattern No. 1', "Note Grouping":[3], "Sequence":[1,7,6,7,6,5,6,5,4,5,4,3,4,3,2,3,2,1]})
+scalesequence.append({"Exercise":'Triplet Pattern No. 2', "Note Grouping":[3], "Sequence":[1,7,6,7,6,5,6,5,4,5,4,3,4,3,2,3,2,1]})
 
 # Triad Arpeggio Sequence No. 1: 1-3-5, 2-4-6, 3-5-7, 4-6-1, 5-7-2, 6-1-3, 7-2-4
 scalesequence.append({"Exercise":'Triad Arpeggio Sequence No. 1', "Note Grouping":[3], "Sequence":[1,3,5,2,4,6,3,5,7,4,6,1,5,7,2,6,1,3,7,2,4]})
@@ -90,7 +90,7 @@ scalesequence.append({"Exercise":'Pentatonic Pattern No. 3', "Note Grouping":[2]
 scalesequence.append({"Exercise":'Pentatonic Pattern No. 4', "Note Grouping":[2], "Sequence":[1,5,2,1,3,2,4,3,5,4,1,5]})
 
 # Major Pentatonic Pattern No. 5: 1-3-6, 2-5-1, 3-6-2, 5-1-3, 6-2-5, 1-3-6 / # Minor Pentatonic Pattern No. 4: 1-4-b7, b3-5-1, 4-b7-b3, 5-1-4, b7-b3-5, 1-4-b7
-scalesequence.append({"Exercise":'Pentatonic Pattern No. 4', "Note Grouping":[3], "Sequence":[1,3,5,2,4,1,3,5,2,4,1,3,5,2,4,1,3,5]})
+scalesequence.append({"Exercise":'Pentatonic Pattern No. 4', "Note Grouping":[3], "Sequence":[1,3,5,2,4,1,3,5,2,4,1,3,5,2,4]})
 
 # Major Pentatonic Pattern No. 6: 1-2-3-5, 3-5-6-1, 6-1-2-3, 2-3-5-6, 5-6-1-2 / # Minor Pentatonic Pattern No. 6: 1-b3-4-5, 4-5-b7-1, b7-1-b3-4, b3-4-5-b7, 5-b7-1-b3
 scalesequence.append({"Exercise":'Pentatonic Pattern No. 5', "Note Grouping":[4], "Sequence":[1,2,3,4,3,4,5,1,5,1,2,3,2,3,4,5,4,5,1,2]})

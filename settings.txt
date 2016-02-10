@@ -1,7 +1,7 @@
-Instrument: Guitar
-Strings: 6
-Tuning: Standard
-Root Note: C
+Instrument: Bass
+Strings: 5
+Tuning: Standard B
+Root Note: F
 Chord Name: maj7
 Scale: Natural Minor
 Training String:

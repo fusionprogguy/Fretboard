@@ -266,7 +266,11 @@ def return_sequence_string(pattern_name):
 
 def show_scale_exercises():
     scale_interval = return_scale_interval(Settings.string_scale)
+    valid_notes = return_scale_notes(Settings.root_note, scale_interval)
 
+    print ""
+    print "SEQUENCE PATTERNS"
+    print "---------------------------------------------------------"
     print ""
     print "Melodic patterns and sequences are a way of playing scales to make them sound less like scales and more like music."
     print "Practicing a wide range of sequences for each scale will cement your understanding of the pattern and the sound of the scale."
@@ -274,9 +278,15 @@ def show_scale_exercises():
     print "you can begin to use scales melodically in your solos."
     print ""
     print "Sequence Patterns for", Settings.string_scale, "Scale"
-    print "Intervals:", ', '.join(scale_interval)
-    print "---------------------------------------------------------"
+    print "Intervals:   ", ', '.join(scale_interval)
+    print "Scale Notes: ", ', '.join(valid_notes)
     print ""
+
+    show_fretboard(tuning_dict, notes_sharp, notes_flat, valid_notes, bool_flat=True, bool_scale=True, bool_interval=False)
+    print ""
+    show_fretboard(tuning_dict, notes_sharp, notes_flat, valid_notes, bool_flat=True, bool_scale=True, bool_interval=True)
+    print ""
+
     for Sequence in scalesequence:   # Go through all patterns for the scale
         e = Sequence["Exercise"]                        # eg Triad Arpeggio Sequence No. 1
         s = Sequence["Sequence"]                        # eg [1, 3, 5, 2, 4, 6, 3, 5, 7, 4, 6, 1, 5, 7, 2, 6, 1, 3, 7, 2, 4]
@@ -3130,11 +3140,12 @@ def show_menu():
     main_menu[11] = "Chord Chart (" + Settings.chord_name.title() + ")"
     main_menu[12] = "Your Chord Sequence (Tabs)"
     main_menu[13] = "Chord Progressions"
-    main_menu[14] = "Play Notes of Scales"
-    main_menu[15] = "Joni Mitchell Tunings Notation"
-    main_menu[16] = "Ted Greene's V-System"
-    main_menu[17] = "Testing V-System"
-    main_menu[18] = "Exit"
+    main_menu[14] = "Scale Sequence Exercises"
+    main_menu[15] = "Play Notes of Scales"  #14
+    main_menu[16] = "Joni Mitchell Tunings Notation"  #15
+    main_menu[17] = "Ted Greene's V-System"  #16
+    main_menu[18] = "Testing"  #17
+    main_menu[19] = "Exit"  #18
 
     while True:
         options = main_menu.keys()
@@ -3155,7 +3166,7 @@ def show_menu():
             elif selection == 3:
                 scale_all_keys()
             elif selection == 4:
-                scale_tabs_all_keys(default_settings=True)
+                scale_tabs_all_keys(default_settings=False)
             elif selection == 5:
                 chord_all_keys()
             elif selection == 6:
@@ -3193,13 +3204,15 @@ def show_menu():
                 chords_from_progression('Bb', ['I', 'ii', 'iii', 'IV', 'V7', 'vi', 'viib5', 'VIII'])
                 chords_from_progression('Bb', ['vi', 'viib5', 'I', 'ii', 'iii', 'IV', 'V7'])
             elif selection == 14:
+                show_scale_exercises()
+            elif selection == 15:
                 play_chosen_scale()
                 # play_sound(frequency = 3000, length = 0.5)
                 # play_chromatic(note_length = 0.1)
                 # play_note(note='A', octave=4, note_length=0.2)
-            elif selection == 15:
-                show_mitchell_tunings()
             elif selection == 16:
+                show_mitchell_tunings()
+            elif selection == 17:
                 show_ted_greene('All Chords')
                 #show_ted_greene('E7#9')
                 #show_ted_greene('E7b5(#9)')
@@ -3207,12 +3220,9 @@ def show_menu():
                 #show_ted_greene('Eb7#9')
                 #show_ted_greene('F7#9')
                 #show_ted_greene('Bm(maj7)')
-            elif selection == 17:
-
-                show_scale_exercises()
-
-                #print "C6   x-x-14-12-10-8"
-                #print drop(fret_close_positions=['x', 'x', '14', '12', '10', '8'], drops=[2,4], start_strings=[2,4], move_to=[3,2], drop_interval=[-12,12])
+            elif selection == 18:
+                print "C6   x-x-14-12-10-8"
+                print drop(fret_close_positions=['x', 'x', '14', '12', '10', '8'], drops=[2,4], start_strings=[2,4], move_to=[3,2], drop_interval=[-12,12])
 
                 #print 'Bb A A# F# Gb C Db', " - ", sharp('Bb A A# F# Gb C Db')
                 #print 'Bb A A# F# Gb C Db', " - ", flat('Bb A A# F# Gb C Db')
@@ -3231,7 +3241,7 @@ def show_menu():
                 #
                 #  print "Db Gb A D Gb Db", duplicate_note("Db Gb A D Gb Db")
                 # print return_v_system('TABS')
-            elif selection == 18:
+            elif selection == 19:
                 exit()
             else:
                 print "Unknown option", selection, "selected!"
