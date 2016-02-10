@@ -182,7 +182,7 @@ def scale_tabs_all_keys(default_settings):
     start_on = 1
 
     if default_settings:
-        my_exercise = Settings.exercise    # Use Settings.exercise to get the settings file data
+        my_exercise = Settings.exercise    # Use the exercise name in the settings.txt file
     else:
         my_exercise = 'All'                # Use 'All' to show all exercises with every key
 
@@ -224,7 +224,7 @@ def scale_tabs_all_keys(default_settings):
         for Sequence in scalesequence:   # Go through all patterns for the sequence
             e = Sequence["Exercise"]                        # eg Triad Arpeggio Sequence No. 1
             s = Sequence["Sequence"]                        # eg [1, 3, 5, 2, 4, 6, 3, 5, 7, 4, 6, 1, 5, 7, 2, 6, 1, 3, 7, 2, 4]
-            if e.lower()==my_exercise.lower() or my_exercise.lower()=='all':
+            if e.lower() == my_exercise.lower() or my_exercise.lower() == 'all':
                 if len(scale_interval) == max(s):
                     show_tabs(Settings.root_note, notes_on_string, start_on, octaves, bool_flat=True, bool_scale=True, pattern=e)
 
