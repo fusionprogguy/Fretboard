@@ -3,7 +3,7 @@ Strings: 6
 Tuning: Standard
 Root Note: C
 Chord Name: maj7
-Scale: Nine Tone
+Scale: Natural Minor
 Training String:
 Start Training Fret: 0
 End Training Fret: 12
@@ -12,7 +12,7 @@ Load And Save Score: N
 Start Chord Fret: 0
 End Chord Fret: 17
 Print Log: No
-Exercise: Diatonic Fourths
+Exercise: Diatonic Thirds Sawtooth
 
 
 
