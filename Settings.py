@@ -38,5 +38,5 @@ load_and_save = str(settings[10]).replace("Load And Save Score:", "").strip(" ")
 start_chord_fret = int(settings[11].replace("Start Chord Fret:", "").strip(" "))   # The starting fret for the chord diagram eg 0
 end_chord_fret = int(settings[12].replace("End Chord Fret:", "").strip(" "))       # The last fret for the chord diagram eg 4
 
-
 print_log = str(settings[13]).replace("Print Log:", "").strip(" ")
+exercise = str(settings[14]).replace("Exercise:", "").strip(" ")                   # Exercise scale patterns. See Exercises.py for valid choices
