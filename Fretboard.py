@@ -42,7 +42,7 @@ if Settings.print_log.lower() == "yes" or Settings.print_log.lower() == "y":
     sys.stdout = Logger(filename)
 
 
-def show_tabs(root_note, notes_per_string, start_interval, num_octaves, bool_flat, bool_scale):
+def show_tabs(root_note, notes_per_string, start_interval, num_octaves, bool_flat, bool_scale, pattern):
     # notes_per_string is the maximum number of notes that you can use on any string
     # string_order is a list of strings numbers to follow. For example [6, 5, 4, 3, 2, 1, 1, 2, 3, 4, 5, 6] will start at the bottom string, go to the top, then down again.
     # start_interval can be any interval eg '1', 'b3', '5' etc but will typically be '1', on which the scale will start. The same applies to end_interval.
@@ -67,17 +67,25 @@ def show_tabs(root_note, notes_per_string, start_interval, num_octaves, bool_fla
                 scale_interval = Scale["L_Steps"]
                 break
     else:  # If you want a fretboard with chords
+        chord_short = shorten_chord(Settings.chord_name)
         scale_interval = chord_dict[chord_short][1:]
 
     valid_notes = return_scale_notes(root_note, scale_interval)
+    pat_interval = scale_pattern_interval(pattern)
+    return_sequence_string(pattern)
 
-    print ""
-    print "Scale Name:  ", root_note, Settings.string_scale
-    print "Steps:       ", scale_steps
-    print "Intervals:   ", ' '.join(scale_interval)
-    print "Scale Notes: ", ' '.join(valid_notes)
-    print ""
-    show_fretboard(tuning_dict, notes_sharp, notes_flat, valid_notes, bool_flat=True, bool_scale=True, bool_interval=False)
+    #return_chord_interval(chord_name)
+
+    #print ""
+    #print "Scale Name:  ", root_note, Settings.string_scale
+    #print "Steps:       ", scale_steps
+    #print "Intervals:   ", ', '.join(scale_interval)
+    #print "Scale Notes: ", ', '.join(valid_notes)
+    #print ""
+    #show_fretboard(tuning_dict, notes_sharp, notes_flat, valid_notes, bool_flat=True, bool_scale=True, bool_interval=False)
+
+    #print "Pattern:", pattern
+    #print "Sequence:", ' '.join(str(pat_interval))
 
     # Find the lowest sounding note in the chord
     #jm_tuning_add = [0 for i in range(int(Settings.string_no))]
@@ -99,12 +107,17 @@ def show_tabs(root_note, notes_per_string, start_interval, num_octaves, bool_fla
     inte = start_interval - 1  # degree of the interval eg for Major scale 1 = '1', 2 = '2', etc
     last_fret = 0
     octave = 0
+
     while string_no < int(Settings.string_no):
         o_string_note = tuning_dict[Settings.dict_tuning][string_no]    # Open string of the instrument
         sum_valid_notes = 0                                             # Check that you don't exceed the number of notes per string
 
         while sum_valid_notes < notes_per_string and octave <= num_octaves:
-            semitones = return_semitones(scale_interval)[inte % len(scale_interval)]
+            if valid_exercise(pattern):
+                tick_mod = pat_interval[inte % len(pat_interval)] - 1   # follows a sequence for the selected pattern (see Exercises.py)
+                # print "PAT INTERVAL", pat_interval, tick_mod + 1
+
+            semitones = return_semitones(scale_interval)[tick_mod % len(scale_interval)]   # repeats intervals from 1-7 or follows selected pattern
             interval = steps[semitones]                                 # eg 1 2 b3 3 b5
             step_from_note = (notes.index(root_note) + semitones)
             fret_note = notes[step_from_note % 12]                      # eg B Db D Eb F Gb G
@@ -160,11 +173,18 @@ def show_tabs(root_note, notes_per_string, start_interval, num_octaves, bool_fla
         print leg
     print ""
 
-def scale_tabs_all_keys():
+
+def scale_tabs_all_keys(default_settings):
     # Print out the fretboard for all root notes
+    # Settings = True -> use settings file to look up specific exercise pattern
     notes_on_string = 3
-    octaves = 2
+    octaves = 3
     start_on = 1
+
+    if default_settings:
+        my_exercise = Settings.exercise    # Use Settings.exercise to get the settings file data
+    else:
+        my_exercise = 'All'                # Use 'All' to show all exercises with every key
 
     print " "
     print " "
@@ -173,13 +193,123 @@ def scale_tabs_all_keys():
     print "Notes per string:", notes_on_string, "  Start on interval:", start_on, "  Octaves:", octaves
 
     # Print the scales for each of the 12 keys
-    for Scale in ListScales:
-        Settings.string_scale = Scale["Scale"]
-        scale_interval = Scale["L_Steps"]
-        if len(scale_interval) > 6:
-            #for root_note in notes_flat:
-            show_tabs('C', notes_on_string, start_on, octaves, bool_flat=True, bool_scale=True)
 
+    for Scale in ListScales:
+        #Settings.string_scale = Scale["Scale"]
+        #scale_interval = Scale["L_Steps"]
+        #scale_steps =  Scale["H_Steps"]
+
+        # Find the Index of the chosen scale
+        scale_interval = ""
+        scale_steps = ""
+
+        if Scale["Scale"] == Settings.string_scale:  # if the scale matches a scale in ListScales
+            scale_steps = Scale["H_Steps"]
+            scale_interval = Scale["L_Steps"]
+            break
+
+    for Settings.root_note in notes_flat:
+        valid_notes = return_scale_notes(Settings.root_note, scale_interval)
+
+        print ""
+        print "Scale Name:  ", Settings.root_note, Settings.string_scale
+        print "Steps:       ", scale_steps
+        print "Intervals:   ", ', '.join(scale_interval)
+        print "Scale Notes: ", ', '.join(valid_notes)
+        print ""
+
+        show_fretboard(tuning_dict, notes_sharp, notes_flat, valid_notes, bool_flat=True, bool_scale=True, bool_interval=False)
+        print ""
+
+        for Sequence in scalesequence:   # Go through all patterns for the sequence
+            e = Sequence["Exercise"]                        # eg Triad Arpeggio Sequence No. 1
+            s = Sequence["Sequence"]                        # eg [1, 3, 5, 2, 4, 6, 3, 5, 7, 4, 6, 1, 5, 7, 2, 6, 1, 3, 7, 2, 4]
+            if e.lower()==my_exercise.lower() or my_exercise.lower()=='all':
+                if len(scale_interval) == max(s):
+                    show_tabs(Settings.root_note, notes_on_string, start_on, octaves, bool_flat=True, bool_scale=True, pattern=e)
+
+
+def chord_tabs_all_chords():
+    print "x"
+
+
+def return_sequence_string(pattern_name):
+    # Returns the sequence for Settings.string_scale (see Exercises.py) depending on the pattern_name
+    scale_interval = return_scale_interval(Settings.string_scale)
+
+    for Sequence in scalesequence:   # Go through all patterns for the scale
+        e = Sequence["Exercise"]                        # eg Triad Arpeggio Sequence No. 1
+        s = Sequence["Sequence"]                        # eg [1, 3, 5, 2, 4, 6, 3, 5, 7, 4, 6, 1, 5, 7, 2, 6, 1, 3, 7, 2, 4]
+        n = Sequence["Note Grouping"][0]                # eg 3
+
+        if pattern_name.lower() == e.lower():
+            for Scale in ListScales:  # Find the intervals for the scale
+                scale_interval = Scale["L_Steps"]
+                if Scale["Scale"] == Settings.string_scale:
+                    if max(s) == len(scale_interval):  # Check that the scale has the same number of degrees
+                        g = [s[i:i+n] for i in range(0, len(s), n)]     # eg [[1, 3, 5], [2, 4, 6], [3, 5, 7], [4, 6, 1], [5, 7, 2], [6, 1, 3], [7, 2, 4]]
+                        p = ['-'.join(str(j) for j in i) for i in g]    # eg ['1-3-5', '2-4-6', '3-5-7', '4-6-1', '5-7-2', '6-1-3', '7-2-4']
+                        q = str(p).replace("'", "").replace("[", "").replace("]", "") # eg 1-3-5, 2-4-6, 3-5-7, 4-6-1, 5-7-2, 6-1-3, 7-2-4
+                        d = ['-'.join(str(scale_interval[int(j-1)]) for j in i) for i in g]
+                        f = str(d).replace("'", "").replace("[", "").replace("]", "")
+                        print e     # eg Triad Arpeggio Sequence No. 1
+                        print q     # eg 1-3-5, 2-4-6, 3-5-7, 4-6-1, 5-7-2, 6-1-3, 7-2-4
+                        print f     # eg 1-b3-b5, 2-3-bb6, b3-b5-bbb7, 3-bb6-1, b5-bbb7-2, bb6-1-b3, bbb7-2-3
+                        return s
+                    else:
+                        print Scale["Scale"], "scale only has", len(scale_interval), "degrees in", scale_interval
+            break
+
+    print "Could not find pattern:", pattern_name, "Scale:", Settings.string_scale
+    return None
+
+
+def show_scale_exercises():
+    scale_interval = return_scale_interval(Settings.string_scale)
+
+    print ""
+    print "Melodic patterns and sequences are a way of playing scales to make them sound less like scales and more like music."
+    print "Practicing a wide range of sequences for each scale will cement your understanding of the pattern and the sound of the scale."
+    print "In addition, playing small patterns and sequences of a scale is common in soloing, so by practicing these sequences,"
+    print "you can begin to use scales melodically in your solos."
+    print ""
+    print "Sequence Patterns for", Settings.string_scale, "Scale"
+    print "Intervals:", ', '.join(scale_interval)
+    print "---------------------------------------------------------"
+    print ""
+    for Sequence in scalesequence:   # Go through all patterns for the scale
+        e = Sequence["Exercise"]                        # eg Triad Arpeggio Sequence No. 1
+        s = Sequence["Sequence"]                        # eg [1, 3, 5, 2, 4, 6, 3, 5, 7, 4, 6, 1, 5, 7, 2, 6, 1, 3, 7, 2, 4]
+        n = Sequence["Note Grouping"][0]                # eg 3
+
+        for Scale in ListScales:  # Find the intervals for the scale
+            scale_interval = Scale["L_Steps"]
+            if Scale["Scale"] == Settings.string_scale and max(s)==len(scale_interval):  # Check that the scale has the same number of degrees
+                # print "Applied to:", Settings.string_scale, ', '.join(scale_interval)
+
+                g = [s[i:i+n] for i in range(0, len(s), n)]     # eg [[1, 3, 5], [2, 4, 6], [3, 5, 7], [4, 6, 1], [5, 7, 2], [6, 1, 3], [7, 2, 4]]
+                p = ['-'.join(str(j) for j in i) for i in g]    # eg ['1-3-5', '2-4-6', '3-5-7', '4-6-1', '5-7-2', '6-1-3', '7-2-4']
+                q = str(p).replace("'", "").replace("[", "").replace("]", "") # eg 1-3-5, 2-4-6, 3-5-7, 4-6-1, 5-7-2, 6-1-3, 7-2-4
+
+                d = ['-'.join(str(scale_interval[int(j-1)]) for j in i) for i in g]
+                f = str(d).replace("'", "").replace("[", "").replace("]", "")
+                print e     # eg Triad Arpeggio Sequence No. 1
+                print q     # eg 1-3-5, 2-4-6, 3-5-7, 4-6-1, 5-7-2, 6-1-3, 7-2-4
+                print f     # eg 1-b3-b5, 2-3-bb6, b3-b5-bbb7, 3-bb6-1, b5-bbb7-2, bb6-1-b3, bbb7-2-3
+                print ""
+                break
+
+
+def scale_pattern_interval(pattern_name):
+    # eg pattern_name = Triad Arpeggio Sequence No. 1
+    s = None
+    for Sequence in scalesequence:   # Go through all patterns for the scale
+        e = Sequence["Exercise"]                        # eg Triad Arpeggio Sequence No. 1
+        s = Sequence["Sequence"]                        # eg [1, 3, 5, 2, 4, 6, 3, 5, 7, 4, 6, 1, 5, 7, 2, 6, 1, 3, 7, 2, 4]
+        if e.lower() == pattern_name.lower():
+            break
+
+    return s
 
 def show_fretboard(tuning_dict, notes_sharp, notes_flat, valid_notes, bool_flat, bool_scale, bool_interval):
     # This function prints a character map of the fretboard
@@ -779,6 +909,17 @@ def return_scale_interval(scale):
     return scale_interval
 
 
+def return_chord_interval(chord_name):
+    # Print out the interval, note, half-step, and note for the chosen chord
+    interval = None
+    for chord in range(1, len(chord_dict[chord_name])):
+        try:
+            interval = chord_dict[chord_name][chord]  # intervals is a list eg ['1','b3','7']
+        except:
+            print "Could not find", chord_name
+    return interval
+
+
 def return_semitones(intervals):
     # intervals is a list eg ['1','b3','7']
     # returns the semitones for the interval eg [0, 3, 11]
@@ -812,6 +953,7 @@ def return_semitones(intervals):
 
         semitones.append(semitone)
     return semitones
+
 
 def return_semitone_distance(root_note, note):  # root_note is a string, note is a string
     # Returns the semi-tones between the two notes root_note and note
@@ -1560,6 +1702,16 @@ def valid_scale(check_scale):
             if check_scale.lower() == Scale_i["Scale"].lower():
                 valid = True
                 break
+    return valid
+
+
+def valid_exercise(check_exercise):
+    # Returns True if check_exercise is found in scalesequence, otherwise returns False
+    valid = False
+    for exercise in scalesequence:  # check through list of scales
+        if check_exercise.lower() == exercise["Exercise"].lower():
+            valid = True
+            break
     return valid
 
 def scale_all_keys():
@@ -3003,7 +3155,7 @@ def show_menu():
             elif selection == 3:
                 scale_all_keys()
             elif selection == 4:
-                scale_tabs_all_keys()
+                scale_tabs_all_keys(default_settings=True)
             elif selection == 5:
                 chord_all_keys()
             elif selection == 6:
@@ -3057,8 +3209,10 @@ def show_menu():
                 #show_ted_greene('Bm(maj7)')
             elif selection == 17:
 
-                print "C6   x-x-14-12-10-8"
-                print drop(fret_close_positions=['x', 'x', '14', '12', '10', '8'], drops=[2,4], start_strings=[2,4], move_to=[3,2], drop_interval=[-12,12])
+                show_scale_exercises()
+
+                #print "C6   x-x-14-12-10-8"
+                #print drop(fret_close_positions=['x', 'x', '14', '12', '10', '8'], drops=[2,4], start_strings=[2,4], move_to=[3,2], drop_interval=[-12,12])
 
                 #print 'Bb A A# F# Gb C Db', " - ", sharp('Bb A A# F# Gb C Db')
                 #print 'Bb A A# F# Gb C Db', " - ", flat('Bb A A# F# Gb C Db')
