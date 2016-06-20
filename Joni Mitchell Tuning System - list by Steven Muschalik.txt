@@ -1,0 +1,138 @@
+Joni Mitchell Tuning Notation
+
+Instead of writing out guitar tunings using the note names for each string Joni
+herself uses a notation system of the bottom (lowest pitch) string followed
+by the fret numbers which you play to tune the next highest open string.
+For example for a 6-string guitar in standard tuning she would write:
+[E, A, D, G, B, E] = [E, 5, 5, 5, 4, 5]
+
+Joni Mitchel Tuning Families
+
+Joni's system of tuning notation makes comparisons between different tunings much easier by
+helping us find open string tuning 'families' which can be sorted by frets as in this list
+produced by Steven Muschalik (www.stevenmuschalik.com) through his project on github 
+https://github.com/fusionprogguy/Fretboard.
+
+
+7-string Guitar:
+
+Standard: B C E G C E G = B 1 4 3 5 4 3
+Alt 2: E G B D G B D = E 3 4 3 5 4 3
+Brazilian: C E A D G B E = C 4 5 5 5 4 5
+Alt 1: E A B D G B D = E 5 2 3 5 4 3
+Big Guitar: G C E G C E G = G 5 4 3 5 4 3
+1/3Rd Size: F Bb D F Bb D F = F 5 4 3 5 4 3
+Alt 4: D G C D G A# D = D 5 5 2 5 3 4
+Alt 3: C G B D G B D = C 7 4 3 5 4 3
+Alt 6: A E A D G B E = A 7 5 5 5 4 5
+Alt 5: B F# B E A D F# = B 7 5 5 5 5 4
+
+6-string Guitar:
+
+Ostrich: D D D D D D = D 0 0 0 0 0
+Pentatonic: A C D E G A = A 3 2 2 3 2
+Minor Third: C D# F# A C D# = C 3 3 3 3 3
+Overtone: C E G A# C D = C 4 3 3 2 2
+Dobro: G B D G B D = G 4 3 5 4 3
+Major Third: C E G# C E G# = C 4 4 4 4 4
+Open E7: E G# D E B E = E 4 6 2 7 5
+Open A: E A C# E A E = E 5 4 3 5 7
+Balalaika: E A D E E A = E 5 5 2 0 5
+Full Step Down: D G C F A D = D 5 5 5 4 5
+Open C#: C# F# B E G# C# = C# 5 5 5 4 5
+Half Step Down: D# G# C# F# A# D# = D# 5 5 5 4 5
+C Tuning: C F A# D# G C = C 5 5 5 4 5
+C# Tuning: C# F# B E G# C# = C# 5 5 5 4 5
+Standard: E A D G B E = E 5 5 5 4 5
+Bb Tuning: A# D# G# C# F A# = A# 5 5 5 4 5
+1 and 1/2 Steps Down: C# F# B E G# C# = C# 5 5 5 4 5
+A to A (Baritone): A D G C E A = A 5 5 5 4 5
+All Fourths: E A D G C F = E 5 5 5 5 5
+Open A Minor7: E A E G C E = E 5 7 3 5 4
+Slow Motion: D G D F C D = D 5 7 3 7 2
+Open G Major7: D G D F# B D = D 5 7 4 5 3
+D G D G A D: D G D G A D = D 5 7 5 2 5
+Open A Minor: E A E A C E = E 5 7 5 3 4
+Open G Minor: D G D G A# D = D 5 7 5 3 4
+Open G: D G D G B D = D 5 7 5 4 3
+G6: D G D G B E = D 5 7 5 4 5
+Open Gsus2: D G D G C D = D 5 7 5 5 2
+Modal G: D G D G C D = D 5 7 5 5 2
+Buzzard: C F C G A# F = C 5 7 7 3 7
+Cittern One: C F C G C D = C 5 7 7 5 2
+Augmented Fourths: C F# C F# C F# = C 6 6 6 6 6
+Open E Minor7: E B D G B E = E 7 3 5 4 5
+D A D D D D: D A D D D D = D 7 5 0 0 0
+Four and Twenty: D A D D A D = D 7 5 0 7 5
+D A D E A D: D A D E A D = D 7 5 2 5 5
+Open D Minor: D A D F A D = D 7 5 3 4 5
+Open E: E B E G# B E = E 7 5 4 3 5
+Open D: D A D F# A D = D 7 5 4 3 5
+Open Dsus2: D A D G A D = D 7 5 5 2 5
+Double Drop D: D A D G B D = D 7 5 5 4 3
+Drop A#: A# F A# D# G C = A# 7 5 5 4 5
+Drop C: C G C F A D = C 7 5 5 4 5
+Drop A: A E A D F# B = A 7 5 5 4 5
+Drop C#: C# G# C# F# A# D# = C# 7 5 5 4 5
+Drop B: B F# B E G# C# = B 7 5 5 4 5
+Drop D: D A D G B E = D 7 5 5 4 5
+Open C Minor: C G C G C D# = C 7 5 7 5 3
+Open C: C G C G C E = C 7 5 7 5 4
+Cittern Two: C G C G C G = C 7 5 7 5 7
+Face: C G D G A D = C 7 7 5 2 5
+Admiral: C G D G B C = C 7 7 5 4 1
+C G D G B D: C G D G B D = C 7 7 5 4 3
+C G D G B E: C G D G B E = C 7 7 5 4 5
+Mandoguitar: C G D A E B = C 7 7 7 7 7
+Lefty: E B G D A E = E 7 8 7 7 7
+Capo 200: C G D D# D D# = C 7 7 1 11 1
+Rusty Cage: B A D G B E = B 10 5 5 4 5
+
+
+5 String Bass:
+
+Standard C: E A D G C = E 5 5 5 5
+Standard B: B E A D G = B 5 5 5 5
+F# BEAD: F# B E A D = F# 5 5 5 5
+Tenor Tuning: A D G C F = A 5 5 5 5
+Drop D: A E A D G = A 7 5 5 5
+
+
+4 String Bass:
+
+Semitone Flat: D# G# C# F# = D# 5 5 5
+Tenor Tuning: A D G C = A 5 5 5
+Low B: B E A D = B 5 5 5
+Standard: E A D G = E 5 5 5
+Piccolo Bass: E A D G = E 5 5 5
+Old Skool Standard: G C F B = G 5 5 6
+Open A: E A E A = E 5 7 5
+Open E: E B E G# = E 7 5 4
+Drop D: D A D G = D 7 5 5
+Drop D Semitone Flat: C# G# C# F# = C# 7 5 5
+Drop B: B A D G = B 10 5 5
+
+
+4 String Banjo:
+
+Open D: D F# A D = D 4 3 5
+Open G Modal: D G A D = D 5 2 5
+Open Gm: D G Bb D = D 5 3 4
+Open G: D G B D = D 5 4 3
+Dropped C: C G B D = C 7 4 3
+
+
+4 String Mandolin:
+
+Dropped D: G D A D = G 7 7 5
+Standard: G D A E = G 7 7 7
+
+
+4 String Bouzouki:
+
+Open G6 / Em7: D G B E = D 5 4 5
+Traditional: C F A D = C 5 4 5
+Open A5: D A D A = D 7 5 7
+Dropped D: G D A D = G 7 7 5
+Standard: G D A E = G 7 7 7
+Open F6 / Dm7: D A F C = D 7 8 7
